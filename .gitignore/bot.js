@@ -41,7 +41,7 @@ client.on('message', message => {
     var HelpEmbed = new Discord.RichEmbed()
     .setColor("0x38ee0e")
     .setTitle("Hey " + message.author.username + "! Here are some information that can help you!")
-    .setDescription("• If you want to invite the bot on your server, [click here!](https://discordapp.com/oauth2/authorize?client_id=689515456771391488&scope=bot&permissions=8)\n • To join our support server, [click here!](https://discord.gg/HyHffQY) \n To see the list of all commands, say ``" + prefix + "cmds``.")
+    .setDescription("**• If you want to invite the bot on your server, [click here!](https://discordapp.com/oauth2/authorize?client_id=689515456771391488&scope=bot&permissions=8)\n • To join our support server, [click here!](https://discord.gg/HyHffQY) \n • To see the list of all commands, say ``" + prefix + "cmds``.**")
     if(message.content === prefix + "help"){
         message.channel.send(Success)
         message.channel.send(HelpEmbed)
