@@ -8,7 +8,7 @@ client.login(process.env.BotToken)
 
 // BOT ADDED & REMOVED
 
-client.on("guildDelete", guild =>{
+client.on("guildCreate", guild =>{
     var BotAddedEmbed = new Discord.RichEmbed()
     .setColor("0x38ee0e")
     .setTitle("MyBot has been added on a server.")
@@ -21,7 +21,7 @@ client.on("guildDelete", guild =>{
 
 client.on("guildDelete", guild =>{
     var BotAddedEmbed = new Discord.RichEmbed()
-    .setColor("0xf35353")
+    .setColor("0xff0000")
     .setTitle("MyBot has been removed from a server.")
     .setDescription(`I am now on ${client.guilds.size} servers !`)
     .setThumbnail(guild.iconURL)
