@@ -31,12 +31,7 @@ client.on("guildDelete", guild =>{
 })
 
 client.on("message", message => {
-    if(message.content === "<@689515456771391488>"){
-        message.channel.send("<@" + message.author.id + ">")
-        var MessageSentEmbed = new Discord.RichEmbed()
-        .setTitle(emoji("689538521161138177") + " I sent you a private message!")
-        message.channel.send(MessageSentEmbed)
-        var InformationEmbed = new Discord.RichEmbed()
-        .setTitle(emoji("689538521161138177") + " This is a test!")
+    if(message.content === "test"){
+        message.channel.send(emoji("689538521161138177") + " I sent you a private message! (Testing Custom Emoji Message)")
     }
 })
