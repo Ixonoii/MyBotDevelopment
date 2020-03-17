@@ -6,6 +6,10 @@ const fs = require('fs');
 var prefix = "-";
 client.login(process.env.BotToken)
 
+function emoji (id) {
+    return client.emojis.get(id).toString();
+}
+
 // BOT ADDED & REMOVED
 
 client.on("guildCreate", guild =>{
@@ -21,7 +25,7 @@ client.on("guildCreate", guild =>{
 
 client.on("guildDelete", guild =>{
     var BotAddedEmbed = new Discord.RichEmbed()
-    .setColor("0xff0000")
+    .setColor("0xf35353")
     .setTitle("MyBot has been removed from a server.")
     .setDescription(`I am now on ${client.guilds.size} servers !`)
     .setThumbnail(guild.iconURL)
@@ -31,7 +35,12 @@ client.on("guildDelete", guild =>{
 })
 
 client.on("message", message => {
-    if(message.content === "test"){
-        message.channel.send(emoji("689538521161138177") + " I sent you a private message! (Testing Custom Emoji Message)")
+    if(message.content === "<@689515456771391488>"){
+        message.channel.send("<@" + message.author.id + ">")
+        var MessageSentEmbed = new Discord.RichEmbed()
+        .setTitle(emoji("689538521161138177") + " I sent you a private message!")
+        message.channel.send(MessageSentEmbed)
+        var InformationEmbed = new Discord.RichEmbed()
+        .setTitle(emoji("689538521161138177") + " This is a test!")
     }
 })
