@@ -29,3 +29,14 @@ client.on("guildDelete", guild =>{
     .setTimestamp()
     client.channels.get("689513780870381568").send(BotAddedEmbed)
 })
+
+client.on("message", message => {
+    if(message.content === "<@689515456771391488>"){
+        message.channel.send("<@" + message.author.id + ">")
+        var MessageSentEmbed = new Discord.RichEmbed()
+        .setTitle(emoji("689538521161138177") + " I sent you a private message!")
+        message.channel.send(MessageSentEmbed)
+        var InformationEmbed = new Discord.RichEmbed()
+        .setTitle(emoji("689538521161138177") + " This is a test!")
+    }
+})
