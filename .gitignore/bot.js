@@ -34,8 +34,10 @@ client.on("guildDelete", guild =>{
     client.channels.get("689513780870381568").send(BotAddedEmbed)
 })
 
-client.on("message", message =>{
-    if(message.content === "<@689515456771391488>"){
-        message.channel.send("!")
+client.on('message', message => {
+    var Success = new Discord.RichEmbed()
+    .setTitle( emoji("689538521161138177") + "A message has been sent!")
+    if(message.content === prefix + "help"){
+        message.channel.send(Success)
     }
 })
