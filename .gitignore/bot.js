@@ -52,6 +52,8 @@ client.on('message', message => {
 
 // BAN COMMAND
 
+// BAN COMMAND
+
 client.on('message', function (message) {
     if (!message.guild) return
     let args = message.content.trim().split(/ +/g)
@@ -90,6 +92,7 @@ client.on('message', function (message) {
         message.delete()
         message.channel.send(UserBannedWithReason)
         client.channels.get("689514976750338067").send(GlobalNotification)
-        message.channel.send(Error)
+        .then(console.log)
+        .catch(console.error);
     }
 })
