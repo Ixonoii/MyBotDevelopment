@@ -56,6 +56,8 @@ client.on('message', message => {
 
 // BAN COMMAND
 
+// BAN COMMAND
+
 client.on('message', function (message) {
     if (!message.guild) return
     let args = message.content.trim().split(/ +/g)
@@ -83,7 +85,8 @@ client.on('message', function (message) {
         var SupportServerBan = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle("A user has been banned with MyBot.")
-        .addField("Information about the ban:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** \n Moderator: **" + message.author.username + "** \n User banned: **" + member.displayName + "** \n Reason: **" + reason + "**")
+        .setThumbnail(member.guild.iconURL)
+        .addField("Information about the ban:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n Moderator: **" + message.author.username + "** (``" + message.author.id + "``) \n User banned: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + reason + "**")
         .setTimestamp()
         client.channels.get("689514976750338067").send(SupportServerBan)
         member.ban({days: 7})
