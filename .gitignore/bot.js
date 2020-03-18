@@ -11,7 +11,7 @@ function emoji (id) {
 }
 
 client.on('ready', function(){
-    client.user.setActivity( emoji("689538521161138177") + "Bot ready to be used!", {type: "PLAYING"})
+    client.user.setActivity(":white_check_mark: Bot ready to be used!", {type: "PLAYING"})
 })
 
 // BOT ADDED & REMOVED
@@ -53,6 +53,119 @@ client.on('message', message => {
         message.author.send(HelpEmbed)
     }
 })
+
+//////////////////////////////////// F U N   C O M MA N D S ////////////////////////////////////
+////////////////////////////////////                        ////////////////////////////////////
+//////////////////////////////////// F U N   C O M MA N D S ////////////////////////////////////
+
+// KISS COMMAND
+
+client.on("message", function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + "kiss") {
+        var NoMention = new Discord.RichEmbed()
+        .setColor("0xf306e6")
+        .setTitle(":kiss: " + message.author.username + " kiss MyBot.")
+        .setImage("https://media0.giphy.com/media/FmB6UTdCj3G12/source.gif")
+        let member = message.mentions.members.first()
+        if(!member) return message.channel.send(NoMention)
+        var success = new Discord.RichEmbed()
+        .setColor("0xf306e6")
+        .setTitle(":kiss: " + message.author.username + " kiss " + member.displayName + ".")
+        .setImage("https://media0.giphy.com/media/FmB6UTdCj3G12/source.gif")
+        message.channel.send(success)
+    }
+})
+
+// FIGHT COMMAND
+
+client.on("message", function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + "fight") {
+        var NoMention = new Discord.RichEmbed()
+        .setColor("0xff0000")
+        .setTitle(":punch: " + message.author.username + " VS MyBot!")
+        .setImage("https://media1.giphy.com/media/eR7OEDQDyA7Cg/giphy.gif")
+        let member = message.mentions.members.first()
+        if(!member) return message.channel.send(NoMention)
+        var success = new Discord.RichEmbed()
+        .setColor("0xff0000")
+        .setTitle(":punch: " + message.author.username + " VS " + member.displayName + "!")
+        .setImage("https://media1.giphy.com/media/eR7OEDQDyA7Cg/giphy.gif")
+        message.channel.send(success)
+    }
+})
+
+// HUG COMMAND
+
+client.on("message", function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + "hug") {
+        var NoMention = new Discord.RichEmbed()
+        .setColor("0xf306e6")
+        .setTitle(":blush: " + message.author.username + " hugs MyBot.")
+        .setImage("https://i.pinimg.com/originals/ab/58/a8/ab58a8f3ad91fd62911f84bf3d54127c.gif")
+        let member = message.mentions.members.first()
+        if(!member) return message.channel.send(NoMention)
+        var success = new Discord.RichEmbed()
+        .setColor("0xf306e6")
+        .setTitle(":blush: " + message.author.username + " hugs " + member.displayName + ".")
+        .setImage("https://i.pinimg.com/originals/ab/58/a8/ab58a8f3ad91fd62911f84bf3d54127c.gif")
+        message.channel.send(success)
+    }
+})
+
+// SLAP COMMAND
+
+client.on("message", function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + "slap") {
+        var NoMention = new Discord.RichEmbed()
+        .setColor("0xff0000")
+        .setTitle(":eyes: " + message.author.username + " slap MyBot.")
+        .setImage("https://media3.giphy.com/media/Gf3AUz3eBNbTW/source.gif")
+        let member = message.mentions.members.first()
+        if(!member) return message.channel.send(NoMention)
+        var success = new Discord.RichEmbed()
+        .setColor("0xff0000")
+        .setTitle(":eyes: " + message.author.username + " slap " + member.displayName + ".")
+        .setImage("https://media3.giphy.com/media/Gf3AUz3eBNbTW/source.gif")
+        message.channel.send(success)
+    }
+})
+
+// SLAP COMMAND
+
+client.on("message", function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + "think") {
+        var NoMention = new Discord.RichEmbed()
+        .setColor("0xf306e6")
+        .setTitle(":thinking: " + message.author.username + " is thinking about... MyBot!")
+        .setImage("https://media2.giphy.com/media/kQ3FSVoJrkYWk/source.gif")
+        let member = message.mentions.members.first()
+        if(!member) return message.channel.send(NoMention)
+        var success = new Discord.RichEmbed()
+        .setColor("0xf306e6")
+        .setTitle(":thinking: " + message.author.username + " is thinking about... " + member.displayName + "!")
+        .setImage("https://media2.giphy.com/media/kQ3FSVoJrkYWk/source.gif")
+        message.channel.send(success)
+    }
+})
+
+//////////////////////////////////// M O D E R A T I O N   C O M MA N D S ////////////////////////////////////
+////////////////////////////////////                                      ////////////////////////////////////
+//////////////////////////////////// M O D E R A T I O N   C O M MA N D S ////////////////////////////////////
 
 // BAN COMMAND
 
@@ -97,7 +210,51 @@ client.on('message', function (message) {
     }
 })
 
-// BAN COMMAND
+// SOFTBAN COMMAND
+
+client.on('message', function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + 'ban') {
+        var SoftBanNotAllowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Ban Members``.")
+        var NotSoftBanMemberMentionned = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must mention someone.")
+        var NoSoftBanReasonEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must enter a reason.")
+        var CantSoftBan = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "I can't softban this user.")
+        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(SoftBanNotAllowed)
+        let member = message.mentions.members.first()
+        let reason = args.slice(2).join(" ")
+        if (!member) return message.channel.send(NotSoftBanMemberMentionned)
+        if (!reason) return message.channel.send(NoSoftBanReasonEntered)
+        if (member.highestRole.calculatedPosition >= message.member.highestRole.calculatedPosition && message.author.id !== message.guild.owner.id) return message.channel.send(CantSoftBan)
+        if (!member.bannable) return message.channel.send(CantSoftBan)
+        var SupportServerBan = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle("Someone has been softbanned with MyBot.")
+        .setThumbnail(member.guild.iconURL)
+        .addField("Information about the softban:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n Moderator: **" + message.author.username + "** (``" + message.author.id + "``) \n User banned: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + reason + "**")
+        .setTimestamp()
+        client.channels.get("689514976750338067").send(SupportServerBan)
+        member.ban({days: 7})
+        message.guild.unban(member)
+        message.delete()
+        var SoftBanSuccess = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + member.displayName + " has been softbanned from the server: ``" + reason + "``")
+        .setTimestamp()
+        message.channel.send(SoftBanSuccess)
+    }
+})
+
+// KICK COMMAND
 
 client.on('message', function (message) {
     if (!message.guild) return
@@ -203,22 +360,79 @@ client.on("message", function (message) {
     }
 })
 
-// STATS COMMAND
+// MUTE COMMAND
 
 client.on('message', function (message) {
     if (!message.guild) return
     let args = message.content.trim().split(/ +/g)
  
-    if (args[0].toLowerCase() === prefix + 'stats') {
-        var StatsNotAllowed = new Discord.RichEmbed()
+    if (args[0].toLowerCase() === prefix + "mute") {
+        var MuteNotAllowed = new Discord.RichEmbed()
         .setColor("0xf35353")
-        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Administrator``.")
-        if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send(StatsNotAllowed)
-        if(!message.guild.id === "689503638020030673") return
-        var StatsEmbed = new Discord.RichEmbed()
-        .setTitle(`Server: **${message.guild.name}** \n Members : **${client.users.size}** \n Channels: **${client.channels.size}** \n Emojis: **${client.emojis.size}**`)
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Messages``.")
+        var NotMuteMemberMentionned = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must mention someone.")
+        var CantMute = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "I can't mute this user.")
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send(MuteNotAllowed)
+        let member = message.mentions.members.first()
+        if (!member) return message.channel.send(NotMuteMemberMentionned)
+        if (member.highestRole.calculatedPosition >= message.member.highestRole.calculatedPosition && message.author.id !== message.guild.ownerID) return message.channel.send(CantMute)
+        if (!member.manageable) return message.channel.send(CantMute)
+        let muterole = message.guild.roles.find(role => role.name === 'Muted')
+        var MuteSuccess = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + member.displayName + " has been muted.")
         .setTimestamp()
-        .setFooter("Requested by " + message.author.tag)
-        message.channel.send(StatsEmbed)
+        if (muterole) {
+            member.addRole(muterole)
+            message.channel.send(MuteSuccess)
+            message.delete()
+        }
+        else {
+            message.guild.createRole({name: 'Muted', permissions: 0}).then(function (role) {
+                message.guild.channels.filter(channel => channel.type === 'text').forEach(function (channel) {
+                    channel.overwritePermissions(role, {
+                        SEND_MESSAGES: false,
+                        ADD_REACTIONS: false,
+                    })
+                })
+                member.addRole(muterole)
+                message.channel.send(MuteSuccess)
+                message.delete()
+            })
+        }
+    }
+})
+
+// UNMUTE COMMAND
+
+client.on('message', function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + "unmute") {
+        var MuteNotAllowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Messages``.")
+        var NotMuteMemberMentionned = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must mention someone.")
+        var CantMute = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "I can't unmute this user.")
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send(MuteNotAllowed)
+        let member = message.mentions.members.first()
+        if (!member) return message.channel.send(NotMuteMemberMentionned)
+        if (member.highestRole.calculatedPosition >= message.member.highestRole.calculatedPosition && message.author.id !== message.guild.ownerID) return message.channel.send(CantMute)
+        if (!member.manageable) return message.channel.send(CantMute)
+        let muterole = message.guild.roles.find(role => role.name === 'Muted')
+        var MuteSuccess = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + member.displayName + " has been unmuted.")
+        .setTimestamp()
+        member.removeRole(muterole)
     }
 })
