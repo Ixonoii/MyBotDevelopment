@@ -52,6 +52,8 @@ client.on('message', message => {
 
 // BAN COMMAND
 
+// BAN COMMAND
+
 client.on('message', function (message) {
     if (!message.guild) return
     let args = message.content.trim().split(/ +/g)
@@ -83,12 +85,12 @@ client.on('message', function (message) {
         .addField("Information about the server:", "Name: **" + message.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **" + message.guildguild.owner + "** (``" + message.guild.ownerID + "``) \n Moderator: **" + message.author.username + "** (``" + message.author.id + "``) \n User banned: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + Reason + "**")
         .setTimestamp()
         client.channels.get("689514976750338067").send(GlobalBanNotification)
-        message.guild.ban(member, {days: 7, reason: Reason})
-       message.delete()
-       var success = new Discord.RichEmbed()
-       .setColor("0x38ee0e")
-       .setTitle( emoji("689538521161138177") + member.displayName + " has been banned from the server: ``" + Reason + "``")
-       .setTimestamp()
-       message.channel.send(success)
+        //message.guild.ban(member, {days: 7})
+        message.delete()
+        var success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + member.displayName + " has been banned from the server: ``" + Reason + "``")
+        .setTimestamp()
+        message.channel.send(success)
     }
 })
