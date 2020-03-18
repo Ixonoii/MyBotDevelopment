@@ -11,7 +11,7 @@ function emoji (id) {
 }
 
 client.on('ready', function(){
-    client.user.setActivity(":white_check_mark: Bot ready to be used!", {type: "PLAYING"})
+    client.user.setActivity("✅ Bot ready to be used!", {type: "PLAYING"})
 })
 
 // BOT ADDED & REMOVED
@@ -196,7 +196,7 @@ client.on('message', function (message) {
         var SupportServerBan = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle("Someone has been banned with MyBot.")
-        .setThumbnail(member.guild.iconURL)
+        .setThumbnail(message.guild.iconURL)
         .addField("Information about the ban:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n Moderator: **" + message.author.username + "** (``" + message.author.id + "``) \n User banned: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + reason + "**")
         .setTimestamp()
         client.channels.get("689514976750338067").send(SupportServerBan)
@@ -216,7 +216,7 @@ client.on('message', function (message) {
     if (!message.guild) return
     let args = message.content.trim().split(/ +/g)
  
-    if (args[0].toLowerCase() === prefix + 'ban') {
+    if (args[0].toLowerCase() === prefix + 'softban') {
         var SoftBanNotAllowed = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Ban Members``.")
@@ -239,7 +239,7 @@ client.on('message', function (message) {
         var SupportServerBan = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle("Someone has been softbanned with MyBot.")
-        .setThumbnail(member.guild.iconURL)
+        .setThumbnail(message.guild.iconURL)
         .addField("Information about the softban:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n Moderator: **" + message.author.username + "** (``" + message.author.id + "``) \n User banned: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + reason + "**")
         .setTimestamp()
         client.channels.get("689514976750338067").send(SupportServerBan)
@@ -283,7 +283,7 @@ client.on('message', function (message) {
         var SupportServerKick = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle("Someone has been kicked with MyBot.")
-        .setThumbnail(member.guild.iconURL)
+        .setThumbnail(message.guild.iconURL)
         .addField("Information about the kick:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n Moderator: **" + message.author.username + "** (``" + message.author.id + "``) \n User kicked: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + reason + "**")
         .setTimestamp()
         client.channels.get("689514976750338067").send(SupportServerKick)
@@ -437,28 +437,31 @@ client.on('message', function (message) {
     }
 })
 
-client.on("message", function (message) {
+// SUGGESTION COMMAND
+
+client.on('message', function (message) {
     if (!message.guild) return
     let args = message.content.trim().split(/ +/g)
  
-    if (args[0].toLowerCase() === prefix + "suggest") {
+    if (args[0].toLowerCase() === prefix + 'suggest') {
         var NoSuggestion = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle( emoji("689538472758870111") + "You must enter a suggestion.")
         let reason = args.slice(1).join(" ")
-        if(!reason) return message.channel.send(NoSuggestion)
-        var SupportServerSuggestion = new Discord.RichEmbed()
-        .setColor("0xf35353")
-        .setTitle(":pushpin: A suggestion has been sent.")
+        if (!reason) return message.channel.send(NoSuggestion)
+        var SupportSuggestion = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle(":pushpin: A suggestion has been sent!")
         .setDescription(reason)
-        .setThumbnail(member.guild.iconURL)
+        .setThumbnail(message.guild.iconURL)
         .addField("Information about the suggestion:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n User: **" + message.author.username + "** (``" + message.author.id + "``)")
         .setTimestamp()
-        var SuggestionSent = new Discord.RichEmbed()
+        client.channels.get("689897913148899337").send(SupportSuggestion)
+        message.delete()
+        var SuggestionSuccess = new Discord.RichEmbed()
         .setColor("0x38ee0e")
-        .setTitle( emoji("689538521161138177") + "Your suggestion has been sent to our support server, thank you!")
+        .setTitle( emoji("689538521161138177") + message.author.username + ", your suggestion has been sent. Thank you!")
         .setTimestamp()
-        message.channel.send(SuggestionSent)
-        client.channels.get("689897913148899337").send(SupportServerSuggestion)
+        message.channel.send(SuggestionSuccess)
     }
 })
