@@ -492,3 +492,14 @@ client.on("message", message => {
         message.channel.send(Success)
     }
 })
+
+client.on('message', message => {
+    var CommandsEmbed = new Discord.RichEmbed()
+    .setColor("0x38ee0e")
+    .addField("Basic commands", "**-help** Displays a few information that can help you.\n **-cmds** Displays a list of all commands.\n **-suggest** Send a suggestion to our developers.\n **-bug** Send a bug report to our developers.")
+    .addField("Fun Commands", "**-kiss** Kissed a user.\n **-slap** Slaps someone.\n **-fight** Start a fight with a user.\n **-hug** Hugs someone.\n **-think** Think about someone.")
+    .addField("Moderation commands", "**-ban** Ban a user.\n **-kick** Kick a user.\n **-purge** Delete a number of messages.\n **-setnick** Set the nickname of a user.\n **-softban** Softban a user (ban and immediate unban to delete user messages).\n **-mute** Mute a user.\n **-unmute** Unmute a user.")
+    .setTimestamp()
+    .setFooter("More coming soon.")
+    message.channel.send(CommandsEmbed)
+})
