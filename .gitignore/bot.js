@@ -439,6 +439,8 @@ client.on('message', function (message) {
 
 // SUGGESTION COMMAND
 
+// SUGGESTION COMMAND
+
 client.on("message", message => {
     if(!message.guild) return
     let args = message.content.trim().split(/ +/g)
@@ -455,5 +457,11 @@ client.on("message", message => {
         .setThumbnail(message.guild.iconURL)
         .addField("Information about the suggestion:", "Server: **" + message.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n User: **" + message.author.username + "** (``" + message.author.id + "``)")
         .setTimestamp()
+        client.channels.get("689897913148899337").send(SuggestionEmbed)
+        var Success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + message.author.username + ", your suggestion has been sent to our support server. Thank you!")
+        .setTimestamp()
+        message.channel.send(Success)
     }
 })
