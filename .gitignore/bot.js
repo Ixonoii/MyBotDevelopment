@@ -549,7 +549,7 @@ client.on("message", message => {
         if(!SuggestionTyped) return message.channel.send(NoSuggestionEntered)
         var Success = new Discord.RichEmbed()
         .setColor("0x38ee0e")
-        .setTitle( emoji("689538521161138177") + "Name set to: ``" + SuggestionTyped + "``")
+        .setTitle( emoji("689538521161138177") + "Topic set to: ``" + SuggestionTyped + "``")
         .setTimestamp()
         message.channel.send(Success)
         message.channel.setTopic(SuggestionTyped)
