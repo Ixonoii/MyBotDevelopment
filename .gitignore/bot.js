@@ -501,7 +501,7 @@ client.on('message', message => {
     .addField("Moderation commands", "**-ban** Ban a user.\n **-kick** Kick a user.\n **-purge** Delete a number of messages.\n **-setnick** Set the nickname of a user.\n **-softban** Softban a user (ban and immediate unban to delete user messages).\n **-mute** Mute a user.\n **-unmute** Unmute a user.")
     .setTimestamp()
     .setFooter("More coming soon.")
-    if(message.content === "-help") {
+    if(message.content === "-cmds") {
         message.channel.send(CommandsEmbed)
     }
 })
