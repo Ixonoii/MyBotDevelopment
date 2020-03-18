@@ -25,7 +25,7 @@ client.on('message', message => {
     .addField("Managment Command", "**-setservername** Change the server name.\n **-setservericon** Change the server icon.\n **-setname** Change the name of a channel. \n **-settopic** Change the topic of a channel.")
     .setTimestamp()
     .setFooter("More coming soon.")
-    if(message.content === "-help") {
+    if(message.content === "-cmds") {
         message.channel.send(CommandsEmbed)
     }
 })
