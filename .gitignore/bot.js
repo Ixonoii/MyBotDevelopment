@@ -506,14 +506,144 @@ client.on('message', message => {
     }
 })
 
-client.on('message', message => {
-    if(message.content === "-lock") {
-        message.channel.send("Channel locked (testing)")
-        message.channel.overwritePermissions([
-            {
-                id: message.author.id,
-                deny: ['SEND_MESSAGES']
-            }
-        ])
+// SETNAME COMMAND
+
+client.on("message", message => {
+    if(!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+
+    if(args[0].toLowerCase() === prefix + 'setname') {
+        var NotALlowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Channels``.")
+        var NoSuggestionEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must enter a new name.")
+        if (!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send(NotALlowed)
+        let SuggestionTyped = args.slice(1).join(" ")
+        if(!SuggestionTyped) return message.channel.send(NoSuggestionEntered)
+        var Success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + "Name set to: ``" + SuggestionTyped + "``")
+        .setTimestamp()
+        message.channel.send(Success)
+        message.channel.setName(SuggestionTyped)
+    }
+})
+
+// SETTOPIC COMMAND
+
+client.on("message", message => {
+    if(!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+
+    if(args[0].toLowerCase() === prefix + 'settopic') {
+        var NoSuggestionEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must enter a new topic.")
+        var NotALlowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Channels``.")
+        if (!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send(NotALlowed)
+        let SuggestionTyped = args.slice(1).join(" ")
+        if(!SuggestionTyped) return message.channel.send(NoSuggestionEntered)
+        var Success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + "Name set to: ``" + SuggestionTyped + "``")
+        .setTimestamp()
+        message.channel.send(Success)
+        message.channel.setTopic(SuggestionTyped)
+    }
+})
+
+// LOCK COMMAND
+
+client.on("message", message => {
+    if(!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+
+    if(args[0].toLowerCase() === prefix + 'lock') {
+        var NotALlowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Channels``.")
+        if (!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send(NotALlowed)
+        message.channel.overwritePermissions(message.author, {
+            SEND_MESSAGES: false,
+        })
+        var Success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + "Channel locked.")
+        .setTimestamp()
+        message.channel.send(Success)
+        message.channel.setTopic(SuggestionTyped)
+    }
+})
+
+// UNLOCK COMMAND
+
+client.on("message", message => {
+    if(!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+
+    if(args[0].toLowerCase() === prefix + 'unlock') {
+        var NotALlowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Channels``.")
+        if (!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send(NotALlowed)
+        message.channel.overwritePermissions(message.author, {
+            SEND_MESSAGES: true,
+        })
+        var Success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + "Channel unlocked.")
+        .setTimestamp()
+        message.channel.send(Success)
+        message.channel.setTopic(SuggestionTyped)
+    }
+})
+
+// HIDE COMMAND
+
+client.on("message", message => {
+    if(!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+
+    if(args[0].toLowerCase() === prefix + 'hide') {
+        var NotALlowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Channels``.")
+        if (!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send(NotALlowed)
+        message.channel.overwritePermissions(message.author, {
+            VIEW_CHANNEL: false,
+        })
+        var Success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + "Channel hidden.")
+        .setTimestamp()
+        message.channel.send(Success)
+        message.channel.setTopic(SuggestionTyped)
+    }
+})
+
+// UNHIDE COMMAND
+
+client.on("message", message => {
+    if(!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+
+    if(args[0].toLowerCase() === prefix + 'unhide') {
+        var NotALlowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Channels``.")
+        if (!message.member.hasPermission("MANAGE_CHANNELS")) return message.channel.send(NotALlowed)
+        message.channel.overwritePermissions(message.author, {
+            VIEW_CHANNEL: true,
+        })
+        var Success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + "Channel visible.")
+        .setTimestamp()
+        message.channel.send(Success)
+        message.channel.setTopic(SuggestionTyped)
     }
 })
