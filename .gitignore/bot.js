@@ -73,7 +73,7 @@ client.on('message', function (message) {
        let member = message.mentions.members.first()
        let Reason = args.slice(2).join(" ")
        if (!member) return message.channel.send(NotMemberMentionned)
-       if (!reason) return message.channel.send(NoReasonEntered)
+       if (!Reason) return message.channel.send(NoReasonEntered)
        if (member.highestRole.calculatedPosition >= message.member.highestRole.calculatedPosition && message.author.id !== message.guild.owner.id) return message.channel.send(CantBan)
        if (!member.bannable) return message.channel.send(CantBan)
        var GlobalBanNotification = new Discord.RichEmbed()
