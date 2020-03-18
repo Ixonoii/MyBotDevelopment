@@ -11,7 +11,7 @@ function emoji (id) {
 }
 
 client.on('ready', function(){
-    client.user.setActivity("Being developed by TheMisterPenguin!", {type: "PLAYING"})
+    client.user.setActivity( emoji("689538521161138177") + "Bot ready to be used!", {type: "PLAYING"})
 })
 
 // BOT ADDED & REMOVED
@@ -50,7 +50,7 @@ client.on('message', message => {
     .setDescription("**• If you want to invite the bot on your server, [click here!](https://discordapp.com/oauth2/authorize?client_id=689515456771391488&scope=bot&permissions=8)\n • To join our support server, [click here!](https://discord.gg/HyHffQY) \n • To see the list of all commands, say ``" + prefix + "cmds``.**")
     if(message.content === prefix + "help"){
         message.channel.send(Success)
-        message.channel.send(HelpEmbed)
+        message.author.send(HelpEmbed)
     }
 })
 
@@ -82,7 +82,7 @@ client.on('message', function (message) {
         if (!member.bannable) return message.channel.send(CantBan)
         var SupportServerBan = new Discord.RichEmbed()
         .setColor("0xf35353")
-        .setTitle("A user has been banned with MyBot.")
+        .setTitle("Someone has been banned with MyBot.")
         .setThumbnail(member.guild.iconURL)
         .addField("Information about the ban:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n Moderator: **" + message.author.username + "** (``" + message.author.id + "``) \n User banned: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + reason + "**")
         .setTimestamp()
@@ -125,7 +125,7 @@ client.on('message', function (message) {
         if (!member.kickable) return message.channel.send(CantKick)
         var SupportServerKick = new Discord.RichEmbed()
         .setColor("0xf35353")
-        .setTitle("A user has been kicked with MyBot.")
+        .setTitle("Someone has been kicked with MyBot.")
         .setThumbnail(member.guild.iconURL)
         .addField("Information about the kick:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n Moderator: **" + message.author.username + "** (``" + message.author.id + "``) \n User kicked: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + reason + "**")
         .setTimestamp()
@@ -137,5 +137,68 @@ client.on('message', function (message) {
         .setTitle( emoji("689538521161138177") + member.displayName + " has been kicked from the server: ``" + reason + "``")
         .setTimestamp()
         message.channel.send(KickSuccess)
+    }
+})
+
+// PURGE COMMAND
+
+client.on('message', function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + "purge") {
+        var PurgeNotAllowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Messages``.")
+        var NoNumberEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "Enter a number of messages to purge.")
+        var IncorrectNumberEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "Enter a number of messages to purge.")
+        var TooHigh = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "Enter a number of messages to purge (1 to 100).")
+        if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.channel.send(PurgeNotAllowed)
+        let count = parseInt(args[1])
+        if (!count) return message.channel.send(NoNumberEntered)
+        if (isNaN(count)) return message.channel.send(IncorrectNumberEntered)
+        if (count < 1 || count > 100) return message.channel.send(TooHigh)
+        message.channel.bulkDelete(count + 1, true)
+    }
+})
+
+// SETNICK COMMAND
+
+client.on("message", function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + "setnick") {
+        var SetnickNotAllowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Nicknames``.")
+        var NoSetnickmemberEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must mention someone.")
+        var NoNewNickEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must enter a new nickname")
+        var CantSetnick = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "I can't rename this user.")
+        if(!message.member.hasPermission("MANAGE_NICKNAMES")) return message.channel.send(SetnickNotAllowed)
+        let member = message.mentions.members.first()
+        let reason = args.slice(2).join(" ")
+        if(!member) return message.channel.send(NoSetnickmemberEntered)
+        if(!reason) return message.channel.send(NoNewNickEntered)
+        if (member.highestRole.calculatedPosition >= message.member.highestRole.calculatedPosition && message.author.id !== message.guild.ownerID) return message.channel.send(CantSetnick)
+        if (!member.manageable) return message.channel.send(CantSetnick)
+        member.setNickname(reason)
+        var SetNickSuccess = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + member.displayName + "'s nickname has been set to: ``" + reason + "``")
+        .setTimestamp()
+        message.channel.send(SetNickSuccess)
     }
 })
