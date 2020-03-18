@@ -202,3 +202,23 @@ client.on("message", function (message) {
         message.channel.send(SetNickSuccess)
     }
 })
+
+// STATS COMMAND
+
+client.on('message', function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + 'stats') {
+        var StatsNotAllowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Administrator``.")
+        if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send(StatsNotAllowed)
+        if(!message.guild.id === "689503638020030673") return
+        var StatsEmbed = new Discord.RichEmbed()
+        .setTitle(`Server: **${message.guild.name}** \n Members : **${client.users.size}** \n Channels: **${client.channels.size}** \n Emojis: **${client.emojis.size}**`)
+        .setTimestamp()
+        .setFooter("Requested by " + message.author.tag)
+        message.channel.send(StatsEmbed)
+    }
+})
