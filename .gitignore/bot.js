@@ -439,29 +439,21 @@ client.on('message', function (message) {
 
 // SUGGESTION COMMAND
 
-client.on('message', function (message) {
-    if (!message.guild) return
+client.on("message", message => {
+    if(!message.guild) return
     let args = message.content.trim().split(/ +/g)
- 
-    if (args[0].toLowerCase() === prefix + 'suggest') {
-        var NoSuggestion = new Discord.RichEmbed()
+
+    if(args[0].toLowerCase() === prefix + 'suggest') {
+        var NoSuggestionEntered = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle( emoji("689538472758870111") + "You must enter a suggestion.")
-        let reason = args.slice(1).join(" ")
-        if (!reason) return message.channel.send(NoSuggestion)
-        var SupportSuggestion = new Discord.RichEmbed()
-        .setColor("0x38ee0e")
-        .setTitle(":pushpin: A suggestion has been sent!")
-        .setDescription(reason)
+        let SuggestionTyped = args.slice(1).join(" ")
+        if(!SuggestionTyped) return message.channel.send(NoSuggestionEntered)
+        var SuggestionEmbed = new Discord.RichEmbed()
+        .setTitle(":pushpin: A suggestion has been sent.")
+        .setDescription(SuggestionTyped)
         .setThumbnail(message.guild.iconURL)
-        .addField("Information about the suggestion:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n User: **" + message.author.username + "** (``" + message.author.id + "``)")
+        .addField("Information about the suggestion:", "Server: **" + message.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n User: **" + message.author.username + "** (``" + message.author.id + "``)")
         .setTimestamp()
-        client.channels.get("689897913148899337").send(SupportSuggestion)
-        message.delete()
-        var SuggestionSuccess = new Discord.RichEmbed()
-        .setColor("0x38ee0e")
-        .setTitle( emoji("689538521161138177") + message.author.username + ", your suggestion has been sent. Thank you!")
-        .setTimestamp()
-        message.channel.send(SuggestionSuccess)
     }
 })
