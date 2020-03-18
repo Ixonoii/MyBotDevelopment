@@ -20,9 +20,9 @@ client.on('message', message => {
     var CommandsEmbed = new Discord.RichEmbed()
     .setColor("0x38ee0e")
     .addField("Basic commands", "**-help** Displays a few information that can help you.\n **-cmds** Displays a list of all commands.\n **-suggest** Send a suggestion to our developers.\n **-bug** Send a bug report to our developers.")
-    .addField("Fun Commands", "**-kiss** Kissed a user.\n **-slap** Slaps someone.\n **-fight** Start a fight with a user.\n **-hug** Hugs someone.\n **-think** Think about someone.")
+    .addField("Fun Commands", "**-kiss** Kissed a user.\n **-slap** Slaps someone.\n **-fight** Start a fight with a user.\n **-hug** Hugs someone.\n **-think** Think about someone.\n **-8ball** Ask a question, get an answer.")
     .addField("Moderation commands", "**-ban** Ban a user.\n **-kick** Kick a user.\n **-purge** Delete a number of messages.\n **-setnick** Set the nickname of a user.\n **-softban** Softban a user (ban and immediate unban to delete user messages).\n **-mute** Mute a user.\n **-unmute** Unmute a user.")
-    .addField("Managment Commands", "**-setservername** Change the server name.\n **-setservericon** Change the server icon.\n **-setname** Change the name of a channel. \n **-settopic** Change the topic of a channel.")
+    .addField("Managment Command", "**-setservername** Change the server name.\n **-setservericon** Change the server icon.\n **-setname** Change the name of a channel. \n **-settopic** Change the topic of a channel.")
     .setTimestamp()
     .setFooter("More coming soon.")
     if(message.content === "-cmds") {
@@ -608,5 +608,24 @@ client.on("message", message => {
         .setTimestamp()
         message.channel.send(Success)
         message.guild.setIcon(SuggestionTyped)
+    }
+})
+
+client.on('message', function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + "8ball") {
+        var NoSuggestionEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must ask a question.")
+        if (!args[1]) return message.channel.send(NoSuggestionEntered)
+        let answers = ["Yes.", "No.", "Maybe.", "Never.", "Of course.","Always."]
+        let question = args.slice(1).join(" ")
+        var Success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + answers[Math.floor(Math.random() * answers.length)])
+        .setTimestamp()
+        message.channel.send(Success)
     }
 })
