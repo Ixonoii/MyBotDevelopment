@@ -505,3 +505,15 @@ client.on('message', message => {
         message.channel.send(CommandsEmbed)
     }
 })
+
+client.on('message', message => {
+    if(message.content === "-lock") {
+        message.channel.send("Channel locked (testing)")
+        message.channel.overwritePermissions([
+            {
+                id: message.author.id,
+                deny: ['SEND_MESSAGES']
+            }
+        ])
+    }
+})
