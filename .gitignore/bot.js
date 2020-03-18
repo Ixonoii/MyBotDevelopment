@@ -14,6 +14,22 @@ client.on('ready', function(){
     client.user.setActivity("✅ Bot ready to be used!", {type: "PLAYING"})
 })
 
+// CMDS COMMAND
+
+client.on('message', message => {
+    var CommandsEmbed = new Discord.RichEmbed()
+    .setColor("0x38ee0e")
+    .addField("Basic commands", "**-help** Displays a few information that can help you.\n **-cmds** Displays a list of all commands.\n **-suggest** Send a suggestion to our developers.\n **-bug** Send a bug report to our developers.")
+    .addField("Fun Commands", "**-kiss** Kissed a user.\n **-slap** Slaps someone.\n **-fight** Start a fight with a user.\n **-hug** Hugs someone.\n **-think** Think about someone.")
+    .addField("Moderation commands", "**-ban** Ban a user.\n **-kick** Kick a user.\n **-purge** Delete a number of messages.\n **-setnick** Set the nickname of a user.\n **-softban** Softban a user (ban and immediate unban to delete user messages).\n **-mute** Mute a user.\n **-unmute** Unmute a user.")
+    .addField("Managment Command", "**-setservername** Change the server name.\n **-setservericon** Change the server icon.\n **-setname** Change the name of a channel. \n **-settopic** Change the topic of a channel.")
+    .setTimestamp()
+    .setFooter("More coming soon.")
+    if(message.content === "-help") {
+        message.channel.send(CommandsEmbed)
+    }
+})
+
 // BOT ADDED & REMOVED
 
 client.on("guildCreate", guild =>{
@@ -462,6 +478,7 @@ client.on("message", message => {
         .setTitle( emoji("689538521161138177") + message.author.username + ", your suggestion has been sent to our support server. Thank you!")
         .setTimestamp()
         message.channel.send(Success)
+        message.delete()
     }
 })
 
@@ -490,19 +507,7 @@ client.on("message", message => {
         .setTitle( emoji("689538521161138177") + message.author.username + ", your bug report has been sent to our support server. Thank you!")
         .setTimestamp()
         message.channel.send(Success)
-    }
-})
-
-client.on('message', message => {
-    var CommandsEmbed = new Discord.RichEmbed()
-    .setColor("0x38ee0e")
-    .addField("Basic commands", "**-help** Displays a few information that can help you.\n **-cmds** Displays a list of all commands.\n **-suggest** Send a suggestion to our developers.\n **-bug** Send a bug report to our developers.")
-    .addField("Fun Commands", "**-kiss** Kissed a user.\n **-slap** Slaps someone.\n **-fight** Start a fight with a user.\n **-hug** Hugs someone.\n **-think** Think about someone.")
-    .addField("Moderation commands", "**-ban** Ban a user.\n **-kick** Kick a user.\n **-purge** Delete a number of messages.\n **-setnick** Set the nickname of a user.\n **-softban** Softban a user (ban and immediate unban to delete user messages).\n **-mute** Mute a user.\n **-unmute** Unmute a user.")
-    .setTimestamp()
-    .setFooter("More coming soon.")
-    if(message.content === "-cmds") {
-        message.channel.send(CommandsEmbed)
+        message.delete()
     }
 })
 
@@ -549,9 +554,59 @@ client.on("message", message => {
         if(!SuggestionTyped) return message.channel.send(NoSuggestionEntered)
         var Success = new Discord.RichEmbed()
         .setColor("0x38ee0e")
-        .setTitle( emoji("689538521161138177") + "Topic set to: ``" + SuggestionTyped + "``")
+        .setTitle( emoji("689538521161138177") + "Name set to: ``" + SuggestionTyped + "``")
         .setTimestamp()
         message.channel.send(Success)
         message.channel.setTopic(SuggestionTyped)
+    }
+})
+
+// SETSERVERNAME COMMAND
+
+client.on("message", message => {
+    if(!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+
+    if(args[0].toLowerCase() === prefix + 'setservername') {
+        var NoSuggestionEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must enter a new name.")
+        var NotALlowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Guild``.")
+        if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send(NotALlowed)
+        let SuggestionTyped = args.slice(1).join(" ")
+        if(!SuggestionTyped) return message.channel.send(NoSuggestionEntered)
+        var Success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + "Server name set to: ``" + SuggestionTyped + "``")
+        .setTimestamp()
+        message.channel.send(Success)
+        message.guild.setName(SuggestionTyped)
+    }
+})
+
+// SETSERVERNAME COMMAND
+
+client.on("message", message => {
+    if(!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+
+    if(args[0].toLowerCase() === prefix + 'setservericon') {
+        var NoSuggestionEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must enter a new icon URL.")
+        var NotALlowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Manage Guild``.")
+        if (!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send(NotALlowed)
+        let SuggestionTyped = args.slice(1).join(" ")
+        if(!SuggestionTyped) return message.channel.send(NoSuggestionEntered)
+        var Success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + "Server icon set to: ``" + SuggestionTyped + "``")
+        .setTimestamp()
+        message.channel.send(Success)
+        message.guild.setIcon(SuggestionTyped)
     }
 })
