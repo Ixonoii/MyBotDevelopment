@@ -23,8 +23,6 @@ client.on("guildCreate", guild =>{
     client.channels.get("689513780870381568").send(BotAddedEmbed)
 })
 
-// BAN COMMAND
-
 client.on("guildDelete", guild =>{
     var BotAddedEmbed = new Discord.RichEmbed()
     .setColor("0xf35353")
@@ -74,7 +72,7 @@ client.on('message', function (message) {
         if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(NotAllowed)
         let member = message.mentions.members.first()
         let Reason = args.slice(2).join(" ")
-        if (!Reason) return message.channel.send(NotMemberMentionned)
+        if (!member) return message.channel.send(NotMemberMentionned)
         if (!Reason) return message.channel.send(NoReasonEntered)
         if (member.highestRole.calculatedPosition >= message.member.highestRole.calculatedPosition && message.author.id !== message.guild.owner.id) return message.channel.send(CantBan)
         if (!member.bannable) return message.channel.send(CantBan)
@@ -82,15 +80,15 @@ client.on('message', function (message) {
         .setColor("0x38ee0e")
         .setTitle( emoji("689538521161138177") + member.displayName + " has been banned from the server: ``" + Reason + "``")
         .setTimestamp()
-        member.ban({days: 7, reason: Reason})
-        message.delete()
-        message.channel.send(UserBannedWithReason)
         var GlobalNotification = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle("A user has been banned with MyBot.")
         .setThumbnail(message.guild.iconURL)
         .addField("Information about the server:", "Name: **" + message.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **" + message.guildguild.owner + "** (``" + message.guild.ownerID + "``) \n Moderator: **" + message.author.username + "** (``" + message.author.id + "``) \n User banned: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + Reason + "**")
         .setTimestamp()
+        member.ban({days: 7})
+        message.delete()
+        message.channel.send(UserBannedWithReason)
         client.channels.get("689514976750338067").send(GlobalNotification)
     }
 })
