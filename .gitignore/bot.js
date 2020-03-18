@@ -23,6 +23,8 @@ client.on("guildCreate", guild =>{
     client.channels.get("689513780870381568").send(BotAddedEmbed)
 })
 
+// BAN COMMAND
+
 client.on("guildDelete", guild =>{
     var BotAddedEmbed = new Discord.RichEmbed()
     .setColor("0xf35353")
@@ -33,6 +35,8 @@ client.on("guildDelete", guild =>{
     .setTimestamp()
     client.channels.get("689513780870381568").send(BotAddedEmbed)
 })
+
+// HELP COMMAND
 
 client.on('message', message => {
     var Success = new Discord.RichEmbed()
@@ -50,60 +54,43 @@ client.on('message', message => {
 
 // BAN COMMAND
 
-client.on("message", message => {
-    if(!message.guild) return
+client.on('message', function (message) {
+    if (!message.guild) return
     let args = message.content.trim().split(/ +/g)
-
-    if (args[0].toLowerCase() === prefix + 'kick'){
+ 
+    if (args[0].toLowerCase() === prefix + 'ban') {
         var NotAllowed = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Kick Members``.")
         var NotMemberMentionned = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle( emoji("689538472758870111") + "You must mention someone.")
+        var NoReasonEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must enter a reason.")
         var CantBan = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle( emoji("689538472758870111") + "I can't ban this user.")
-        if(!message.member.hasPermission('KICK_MEMBERS')) return message.channel.send(NotAllowed)
+        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(NotAllowed)
         let member = message.mentions.members.first()
-        let banreason = args.slice(1).join(" ")
-        if(!member) return message.channel.send(NotMemberMentionned)
-        if(member.highestRole.calculatedPosition >= message.member.highestRole.calculatedPosition && message.author.id !== message.guild.owner.id) return message.channel.send(CantBan)
-        if(!member.kickable) return message.channel.send(CantBan)
-        var UserBannedNoReason = new Discord.RichEmbed()
-        .setColor("0x38ee0e")
-        .setTitle( emoji("689538521161138177") + member.displayName + " has been banned from the server: ``No reason given.``")
-        var BanNotification1 = new Discord.RichEmbed()
-        .setColor("0x38ee0e")
-        .setTitle("You've been banned from " + message.guild.name + ".")
-        .setDescription("Reason: ``No reason given.``")
-        var GuildNotification1 = new Discord.RichEmbed()
-        .setColor("0xf35353")
-        .setTitle("Someone has been banned.")
-        .addField("Ban information:", "Server: **" + guild.name + "** (``" + guild.id + "``) \n Members: **" + guild.memberCount + "** \n Moderator: **" + message.author.tag + "** (``" + message.author.id + "``) \n User banned: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **No reason given.**")
-        if(!reason) return message.channel.send(UserBannedNoReason)
-        if(!reason) return message.guild.ban(member, {days: 7, reason: "No reason given. [Banned by " + message.author.tag + "]"})
-        if(!reason) return client.channels.get("689514976750338067").send(GuildNotification1)
-        if(!reason) return member.send(BanNotification1)
+        let Reason = args.slice(2).join(" ")
+        if (!Reason) return message.channel.send(NotMemberMentionned)
+        if (!Reason) return message.channel.send(NoReasonEntered)
+        if (member.highestRole.calculatedPosition >= message.member.highestRole.calculatedPosition && message.author.id !== message.guild.owner.id) return message.channel.send(CantBan)
+        if (!member.bannable) return message.channel.send(CantBan)
         var UserBannedWithReason = new Discord.RichEmbed()
         .setColor("0x38ee0e")
-        .setTitle( emoji("689538521161138177") + member.displayName + " has been banned from the server: ``" + banreason + "``")
+        .setTitle( emoji("689538521161138177") + member.displayName + " has been banned from the server: ``" + Reason + "``")
         .setTimestamp()
-        message.guild.ban(member, {days: 7, reason: banreason})
-        message.channel.send(UserBannedWithReason)
-        var BanNotification2 = new Discord.RichEmbed()
-        .setColor("0x38ee0e")
-        .setTitle("You've been banned from " + message.guild.name + ".")
-        .setDescription("Reason: ``" + banreason + "``")
-        .setTimestamp()
-        var GuildNotification2 = new Discord.RichEmbed()
-        .setColor("0xf35353")
-        .setTitle("Someone has been banned.")
-        .setThumbnail(message.guild.iconURL)
-        .addField("Ban information:", "Server: **" + guild.name + "** (``" + guild.id + "``) \n Members: **" + guild.memberCount + "** \n Moderator: **" + message.author.tag + "** (``" + message.author.id + "``) \n User banned: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + banreason + "**")
-        .setTimestamp()
-        client.channels.get("689514976750338067").send(GuildNotification2)
-        member.send(BanNotification2)
+        member.ban({days: 7, reason: Reason})
         message.delete()
+        message.channel.send(UserBannedWithReason)
+        var GlobalNotification = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle("A user has been banned with MyBot.")
+        .setThumbnail(message.guild.iconURL)
+        .addField("Information about the server:", "Name: **" + message.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **" + message.guildguild.owner + "** (``" + message.guild.ownerID + "``) \n Moderator: **" + message.author.username + "** (``" + message.author.id + "``) \n User banned: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + Reason + "**")
+        .setTimestamp()
+        client.channels.get("689514976750338067").send(GlobalNotification)
     }
 })
