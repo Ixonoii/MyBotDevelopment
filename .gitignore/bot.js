@@ -90,5 +90,6 @@ client.on('message', function (message) {
         message.delete()
         message.channel.send(UserBannedWithReason)
         client.channels.get("689514976750338067").send(GlobalNotification)
+        message.channel.send(Error)
     }
 })
