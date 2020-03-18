@@ -11,7 +11,7 @@ function emoji (id) {
 }
 
 client.on('ready', function(){
-    client.user.setActivity("✅ Bot ready to be used!", {type: "PLAYING"})
+    client.user.setActivity("[NEW] Need help? Use -help.", {type: "PLAYING"})
 })
 
 // CMDS COMMAND
