@@ -11,7 +11,7 @@ function emoji (id) {
 }
 
 client.on('ready', function(){
-    client.user.setActivity("✅ Bot ready to be used!", {type: "PLAYING"})
+    client.user.setActivity(":white_check_mark: Bot ready to be used!", {type: "PLAYING"})
 })
 
 // BOT ADDED & REMOVED
@@ -434,5 +434,31 @@ client.on('message', function (message) {
         .setTitle( emoji("689538521161138177") + member.displayName + " has been unmuted.")
         .setTimestamp()
         member.removeRole(muterole)
+    }
+})
+
+client.on("message", function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + "suggest") {
+        var NoSuggestion = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must enter a suggestion.")
+        let reason = args.slice(1).join(" ")
+        if(!reason) return message.channel.send(NoSuggestion)
+        var SupportServerSuggestion = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle(":pushpin: A suggestion has been sent.")
+        .setDescription(reason)
+        .setThumbnail(member.guild.iconURL)
+        .addField("Information about the suggestion:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n User: **" + message.author.username + "** (``" + message.author.id + "``)")
+        .setTimestamp()
+        var SuggestionSent = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + "Your suggestion has been sent to our support server, thank you!")
+        .setTimestamp()
+        message.channel.send(SuggestionSent)
+        client.channels.get("689897913148899337").send(SupportServerSuggestion)
     }
 })
