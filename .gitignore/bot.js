@@ -11,7 +11,7 @@ function emoji (id) {
 }
 
 client.on('ready', function(){
-    client.user.setActivity( emoji("689538521161138177") + "Bot ready to be used!", {type: "PLAYING"})
+    client.user.setActivity("Being developed by TheMisterPenguin!", {type: "PLAYING"})
 })
 
 // BOT ADDED & REMOVED
@@ -56,8 +56,6 @@ client.on('message', message => {
 
 // BAN COMMAND
 
-// BAN COMMAND
-
 client.on('message', function (message) {
     if (!message.guild) return
     let args = message.content.trim().split(/ +/g)
@@ -65,7 +63,7 @@ client.on('message', function (message) {
     if (args[0].toLowerCase() === prefix + 'ban') {
         var BanNotAllowed = new Discord.RichEmbed()
         .setColor("0xf35353")
-        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Kick Members``.")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Ban Members``.")
         var NotBanMemberMentionned = new Discord.RichEmbed()
         .setColor("0xf35353")
         .setTitle( emoji("689538472758870111") + "You must mention someone.")
@@ -96,5 +94,48 @@ client.on('message', function (message) {
         .setTitle( emoji("689538521161138177") + member.displayName + " has been banned from the server: ``" + reason + "``")
         .setTimestamp()
         message.channel.send(BanSuccess)
+    }
+})
+
+// BAN COMMAND
+
+client.on('message', function (message) {
+    if (!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+ 
+    if (args[0].toLowerCase() === prefix + 'kick') {
+        var BanNotAllowed = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You don't have the required permissions to use this command: ``Kick Members``.")
+        var NotBanMemberMentionned = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must mention someone.")
+        var NoBanReasonEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must enter a reason.")
+        var CantKick = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "I can't kick this user.")
+        if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send(BanNotAllowed)
+        let member = message.mentions.members.first()
+        let reason = args.slice(2).join(" ")
+        if (!member) return message.channel.send(NotBanMemberMentionned)
+        if (!reason) return message.channel.send(NoBanReasonEntered)
+        if (member.highestRole.calculatedPosition >= message.member.highestRole.calculatedPosition && message.author.id !== message.guild.owner.id) return message.channel.send(CantBan)
+        if (!member.kickable) return message.channel.send(CantKick)
+        var SupportServerKick = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle("A user has been kicked with MyBot.")
+        .setThumbnail(member.guild.iconURL)
+        .addField("Information about the kick:", "Server: **" + member.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n Moderator: **" + message.author.username + "** (``" + message.author.id + "``) \n User kicked: **" + member.displayName + "** (``" + member.id + "``) \n Reason: **" + reason + "**")
+        .setTimestamp()
+        client.channels.get("689514976750338067").send(SupportServerKick)
+        member.ban({days: 7})
+        message.delete()
+        var KickSuccess = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + member.displayName + " has been kicked from the server: ``" + reason + "``")
+        .setTimestamp()
+        message.channel.send(KickSuccess)
     }
 })
