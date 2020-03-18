@@ -439,8 +439,6 @@ client.on('message', function (message) {
 
 // SUGGESTION COMMAND
 
-// SUGGESTION COMMAND
-
 client.on("message", message => {
     if(!message.guild) return
     let args = message.content.trim().split(/ +/g)
@@ -452,6 +450,7 @@ client.on("message", message => {
         let SuggestionTyped = args.slice(1).join(" ")
         if(!SuggestionTyped) return message.channel.send(NoSuggestionEntered)
         var SuggestionEmbed = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
         .setTitle(":pushpin: A suggestion has been sent.")
         .setDescription(SuggestionTyped)
         .setThumbnail(message.guild.iconURL)
@@ -461,6 +460,34 @@ client.on("message", message => {
         var Success = new Discord.RichEmbed()
         .setColor("0x38ee0e")
         .setTitle( emoji("689538521161138177") + message.author.username + ", your suggestion has been sent to our support server. Thank you!")
+        .setTimestamp()
+        message.channel.send(Success)
+    }
+})
+
+// BUG COMMAND
+
+client.on("message", message => {
+    if(!message.guild) return
+    let args = message.content.trim().split(/ +/g)
+
+    if(args[0].toLowerCase() === prefix + 'bug') {
+        var NoSuggestionEntered = new Discord.RichEmbed()
+        .setColor("0xf35353")
+        .setTitle( emoji("689538472758870111") + "You must enter a bug report.")
+        let SuggestionTyped = args.slice(1).join(" ")
+        if(!SuggestionTyped) return message.channel.send(NoSuggestionEntered)
+        var SuggestionEmbed = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle(":gear: A bug report has been sent.")
+        .setDescription(SuggestionTyped)
+        .setThumbnail(message.guild.iconURL)
+        .addField("Information about the bug report:", "Server: **" + message.guild.name + "** (``" + message.guild.id + "``) \n Members: **" + message.guild.memberCount + "** \n Owner: **<@" + message.guild.ownerID + ">** (``" + message.guild.ownerID + "``) \n User: **" + message.author.username + "** (``" + message.author.id + "``)")
+        .setTimestamp()
+        client.channels.get("689897913148899337").send(SuggestionEmbed)
+        var Success = new Discord.RichEmbed()
+        .setColor("0x38ee0e")
+        .setTitle( emoji("689538521161138177") + message.author.username + ", your bug report has been sent to our support server. Thank you!")
         .setTimestamp()
         message.channel.send(Success)
     }
