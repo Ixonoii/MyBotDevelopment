@@ -11,7 +11,7 @@ function emoji (id) {
 }
 
 client.on('ready', function(){
-    client.user.setActivity(":white_check_mark: Bot ready to be used!", {type: "PLAYING"})
+    client.user.setActivity("✅ Bot ready to be used!", {type: "PLAYING"})
 })
 
 // BOT ADDED & REMOVED
@@ -67,13 +67,13 @@ client.on("message", function (message) {
     if (args[0].toLowerCase() === prefix + "kiss") {
         var NoMention = new Discord.RichEmbed()
         .setColor("0xf306e6")
-        .setTitle(":kiss: " + message.author.username + " kiss MyBot.")
+        .setTitle(":kiss: " + message.author.username + " kisses MyBot.")
         .setImage("https://media0.giphy.com/media/FmB6UTdCj3G12/source.gif")
         let member = message.mentions.members.first()
         if(!member) return message.channel.send(NoMention)
         var success = new Discord.RichEmbed()
         .setColor("0xf306e6")
-        .setTitle(":kiss: " + message.author.username + " kiss " + member.displayName + ".")
+        .setTitle(":kiss: " + message.author.username + " kisses " + member.displayName + ".")
         .setImage("https://media0.giphy.com/media/FmB6UTdCj3G12/source.gif")
         message.channel.send(success)
     }
@@ -130,13 +130,13 @@ client.on("message", function (message) {
     if (args[0].toLowerCase() === prefix + "slap") {
         var NoMention = new Discord.RichEmbed()
         .setColor("0xff0000")
-        .setTitle(":eyes: " + message.author.username + " slap MyBot.")
+        .setTitle(":eyes: " + message.author.username + " slaps MyBot.")
         .setImage("https://media3.giphy.com/media/Gf3AUz3eBNbTW/source.gif")
         let member = message.mentions.members.first()
         if(!member) return message.channel.send(NoMention)
         var success = new Discord.RichEmbed()
         .setColor("0xff0000")
-        .setTitle(":eyes: " + message.author.username + " slap " + member.displayName + ".")
+        .setTitle(":eyes: " + message.author.username + " slaps " + member.displayName + ".")
         .setImage("https://media3.giphy.com/media/Gf3AUz3eBNbTW/source.gif")
         message.channel.send(success)
     }
