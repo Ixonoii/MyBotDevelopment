@@ -647,15 +647,3 @@ client.on('message', function (message) {
         message.channel.send(Success)
     }
 })
-
-client.on('message', message =>{
-    if(message.content === prefix + "await"){
-        await message.channel.send("Awaiting: Processing")
-
-        const msgs = await message.channel.awaitMessages(msg =>{
-            return msg.content.includes("confirm");
-        })
-
-        message.channel.send("Awaiting: Success!")
-    }
-})
