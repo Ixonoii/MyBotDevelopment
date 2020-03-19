@@ -11,7 +11,7 @@ function emoji (id) {
 }
 
 client.on('ready', function(){
-    client.user.setActivity("[NEW] Need help? Use -help.", {type: "PLAYING"})
+    client.user.setActivity("Need help? Use -help!", {type: "PLAYING"})
 })
 
 // CMDS COMMAND
@@ -19,7 +19,7 @@ client.on('ready', function(){
 client.on('message', message => {
     var CommandsEmbed = new Discord.RichEmbed()
     .setColor("0x38ee0e")
-    .addField("Basic commands", "**-help** Displays a few information that can help you.\n **-cmds** Displays a list of all commands.\n **-suggest** Send a suggestion to our developers.\n **-bug** Send a bug report to our developers.")
+    .addField("Basic commands", "**-help** Displays a few information that can help you.\n **-cmds** Displays a list of all commands.\n **-suggest** Send a suggestion to our developers.\n **-bug** Send a bug report to our developers.\n **-support** Sends a link to join our support server.\n **-invite** Sends a link to add MyBot on your server.")
     .addField("Fun Commands", "**-kiss** Kissed a user.\n **-slap** Slaps someone.\n **-fight** Start a fight with a user.\n **-hug** Hugs someone.\n **-think** Think about someone.\n **-8ball** Ask a question, get an answer.")
     .addField("Moderation commands", "**-ban** Ban a user.\n **-kick** Kick a user.\n **-purge** Delete a number of messages.\n **-setnick** Set the nickname of a user.\n **-softban** Softban a user (ban and immediate unban to delete user messages).\n **-mute** Mute a user.\n **-unmute** Unmute a user.")
     .addField("Managment Command", "**-setservername** Change the server name.\n **-setservericon** Change the server icon.\n **-setname** Change the name of a channel. \n **-settopic** Change the topic of a channel.")
@@ -63,10 +63,28 @@ client.on('message', message => {
     var HelpEmbed = new Discord.RichEmbed()
     .setColor("0x38ee0e")
     .setTitle("Hey " + message.author.username + "! Here are some information that can help you:")
-    .setDescription("**• If you want to invite the bot on your server, [click here!](https://discordapp.com/oauth2/authorize?client_id=689515456771391488&scope=bot&permissions=8)\n • To join our support server, [click here!](https://discord.gg/qsV4x8r) \n • To see the list of all commands, say ``" + prefix + "cmds``.**")
+    .setDescription("**• If you want to invite the bot on your server, [click here!](https://discordapp.com/oauth2/authorize?client_id=689515456771391488&scope=bot&permissions=8)\n • To join our support server, [click here!](https://discord.gg/HyHffQY) \n • To see the list of all commands, say ``" + prefix + "cmds``.**")
     if(message.content === prefix + "help"){
         message.channel.send(Success)
         message.author.send(HelpEmbed)
+    }
+})
+
+client.on('message', message => {
+    var Success = new Discord.RichEmbed()
+    .setColor("0x38ee0e")
+    .setTitle( emoji("689538521161138177") + "Hey " + message.author.username + "! Want to add MyBot on your server? You can do it by [cliking here!](https://discordapp.com/oauth2/authorize?client_id=689515456771391488&scope=bot&permissions=8)")
+    if(message.content === prefix + "invite"){
+        message.channel.send(Success)
+    }
+})
+
+client.on('message', message => {
+    var Success = new Discord.RichEmbed()
+    .setColor("0x38ee0e")
+    .setTitle( emoji("689538521161138177") + "Hey " + message.author.username + "! Want to join our support server? You can do it by [cliking here!](discord.gg/qsV4x8r)")
+    if(message.content === prefix + "support"){
+        message.channel.send(Success)
     }
 })
 
