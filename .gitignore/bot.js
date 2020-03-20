@@ -288,7 +288,7 @@ client.on('message', function (message) {
         message.delete()
         var SoftBanSuccess = new Discord.RichEmbed()
         .setColor("0x38ee0e")
-        .setTitle( emoji("689538521161138177") + member.displayName + " has been softbanned from the server: ``" + reason + "``")
+        .setTitle( emoji("689514976750338067") + member.displayName + " has been softbanned from the server: ``" + reason + "``")
         .setTimestamp()
         message.channel.send(SoftBanSuccess)
     }
@@ -335,7 +335,7 @@ client.on('message', function (message) {
         message.delete()
         var KickSuccess = new Discord.RichEmbed()
         .setColor("0x38ee0e")
-        .setTitle( emoji("689538521161138177") + member.displayName + " has been kicked from the server: ``" + reason + "``")
+        .setTitle( emoji("689514976750338067") + member.displayName + " has been kicked from the server: ``" + reason + "``")
         .setTimestamp()
         message.channel.send(KickSuccess)
     }
@@ -418,7 +418,7 @@ client.on("message", function (message) {
         client.channels.get("689514976750338067").send(SupportServerBan)
         var SetNickSuccess = new Discord.RichEmbed()
         .setColor("0x38ee0e")
-        .setTitle( emoji("689538521161138177") + member.displayName + "'s nickname has been set to: ``" + reason + "``")
+        .setTitle( emoji("689514976750338067") + member.displayName + "'s nickname has been set to: ``" + reason + "``")
         .setTimestamp()
         message.channel.send(SetNickSuccess)
     }
@@ -610,7 +610,7 @@ client.on("message", message => {
         .addField("New name:", SuggestionTyped)
         .setThumbnail(message.guild.iconURL)
         .setTimestamp()
-        client.channels.get("689897913148899337").send(SupportServerBan)
+        client.channels.get("689514976750338067").send(SupportServerBan)
         message.channel.send(Success)
         message.channel.setName(SuggestionTyped)
     }
@@ -646,7 +646,7 @@ client.on("message", message => {
         .addField("New topic:", SuggestionTyped)
         .setThumbnail(message.guild.iconURL)
         .setTimestamp()
-        client.channels.get("689897913148899337").send(SupportServerBan)
+        client.channels.get("689514976750338067").send(SupportServerBan)
         message.channel.send(Success)
         message.channel.setTopic(SuggestionTyped)
     }
@@ -681,7 +681,7 @@ client.on("message", message => {
         .addField("New name:", SuggestionTyped)
         .setThumbnail(message.guild.iconURL)
         .setTimestamp()
-        client.channels.get("689897913148899337").send(SupportServerBan)
+        client.channels.get("689514976750338067").send(SupportServerBan)
         message.channel.send(Success)
         message.guild.setName(SuggestionTyped)
     }
@@ -717,7 +717,7 @@ client.on("message", message => {
         .setThumbnail(message.guild.iconURL)
         .setImage(SuggestionTyped)
         .setTimestamp()
-        client.channels.get("689897913148899337").send(SupportServerBan)
+        client.channels.get("689514976750338067").send(SupportServerBan)
         message.channel.send(Success)
         message.guild.setIcon(SuggestionTyped)
     }
